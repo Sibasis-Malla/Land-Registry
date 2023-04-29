@@ -1,7 +1,12 @@
-import React from "react";
+import React,{useContext} from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import Web3Context from '../contexts';
+
 const Navbar = ({ selected }) => {
+  const { connectWallet, account,Contract } = useContext(Web3Context);
+  // console.log(Contract)
+
   const navigate = useNavigate();
   function handleClick(event) {
     switch (event) {
@@ -44,16 +49,17 @@ const Navbar = ({ selected }) => {
   return (
     <nav class=" mb-6 shadow-lg bg-gradient-to-r from-white to-gray-200 border-gray-200 dark:bg-gray-900">
       <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a href="https://flowbite.com/" class="flex items-center">
+        <a class="flex items-center">
           <img
             src="https://flowbite.com/docs/images/logo.svg"
             class="h-8 mr-3"
             alt="Flowbite Logo"
           />
-          <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-            Flowbite
+          <span class="self-center text-2xl font-semibold whitespace-nowrap text-black">
+            Terra
           </span>
         </a>
+      
         <div class="flex md:order-2">
           {selected === "Buy and Sell" && (
             <div className="flex flex-row space-x-3">
@@ -93,7 +99,7 @@ const Navbar = ({ selected }) => {
               <LinkComp linkTo="/" text="Home" />
             </li>
             <li>
-              <LinkComp linkTo="/buy-sell" text="Buy and Sell" />
+              <LinkComp linkTo="/addLand" text="Add Land Info" />
             </li>
             <li>
               <LinkComp linkTo="/services" text="Services" />
@@ -102,7 +108,24 @@ const Navbar = ({ selected }) => {
               <LinkComp linkTo="/dashboard" text="Dashboard" />
             </li>
           </ul>
+          {/* <button type="button" class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Alternative</button> */}
+
+          {account.currentAccount == null ?(<div  class="mr-24 cursor-pointer text-white bg-black w-52 h-10 text-center rounded-xl pt-2 px-4" onClick={connectWallet} >+ Connect Wallet</div>):(
+          <div className=" flex justify-center items-center mr-24 text-black">
+            Hey,{' '}
+            {`${String(account.currentAccount).slice(0, 9)}...${String(
+              account.currentAccount
+            ).slice(String(account.currentAccount).length - 9)}`}
+          </div>
+        )}
         </div>
+         {/* <div type="button" class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">+ Connect Wallet</div> */}
+        {/* <div
+            className="mr-24 cursor-pointer text-black bg-secondary-2 w-52 h-10 text-center rounded-xl pt-2 px-4"
+            // onClick={connectWallet}
+          >
+            + Connect Wallet
+          </div> */}
       </div>
     </nav>
   );

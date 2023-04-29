@@ -6,6 +6,9 @@
     "test": "truffle test"
   },
   "dependencies": {
-    "@truffle/hdwallet-provider": "^2.1.7"
+    "@truffle/hdwallet-provider": "^2.1.7",
+    "dotenv": "^16.0.3",
+    "truffle-plugin-verify": "^0.6.3",
+    "truffle-verify": "^1.0.8"
   }
 }

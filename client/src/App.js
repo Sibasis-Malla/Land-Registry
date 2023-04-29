@@ -1,16 +1,26 @@
-import React from "react";
+import React,{useEffect,useContext} from "react";
 import { Routes } from "react-router-dom";
 import { Route } from "react-router-dom";
 import Home from "./Pages/Home";
-import BuySell from "./Pages/BuySell";
+import AddLand from "./Pages/AddLand";
 import SellLand from "./Pages/SellLand";
 import BuyLand from "./Pages/BuyLand";
 import DashBoard from "./Pages/DashBoard";
+import Web3Context from "./contexts";
+
 const App = () => {
+  const { checkIfWalletIsConnected,Contract } = useContext(Web3Context);
+  window.ethereum&&window.ethereum.on('accountsChanged', function (accounts) {
+    setTimeout(window.location.reload(false), 1000);
+  });
+  // console.log(Contract)
+  useEffect(() => {
+    checkIfWalletIsConnected();
+  }, []);
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/buy-sell" element={<BuySell />} />
+      <Route path="/addLand" element={<AddLand />} />
       <Route path="/buy-land" element={<BuyLand />} />
       <Route path="/sell-land" element={<SellLand />} />
       <Route path="/dashboard" element={<DashBoard/>}/>

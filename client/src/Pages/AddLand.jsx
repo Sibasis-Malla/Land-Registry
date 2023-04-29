@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import Input from "../Components/Input";
 import Navbar from "../Components/Navbar";
-import { IoIosAdd } from "react-icons/io";
+
 import { AiOutlineDelete } from "react-icons/ai";
 
-const BuySell = () => {
+const AddLand = () => {
   const [NumberOfInputs, setNumberOfInputs] = useState([1]);
   const [count, setCount] = useState(2);
   console.log(NumberOfInputs);
   return (
     <div>
-      <Navbar selected="Buy and Sell" />
+      <Navbar selected="AddLand" />
       <div>
         <div className=" flex flex-col w-1/3 justify-around">
           {NumberOfInputs.map((items, index) => {
@@ -51,4 +51,4 @@ const BuySell = () => {
   );
 };
 
-export default BuySell;
+export default AddLand;

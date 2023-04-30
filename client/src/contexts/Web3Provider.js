@@ -1,6 +1,7 @@
 /* eslint-disable */
 import React, { useState } from 'react';
 import LandRegister from '../contracts/LandRegister.json';
+import TerraToken from '../contracts/TerraToken.json'
 import { Web3Context } from './index';
 import Web3 from 'web3';
 
@@ -11,6 +12,7 @@ const Web3Provider = ({ children }) => {
     currentAccount: null,
   });
   const [Contract, setContract] = useState('');
+  const [balance,setBalance]=useState('')
 
 
   const connectWallet = async () => {
@@ -57,7 +59,13 @@ const Web3Provider = ({ children }) => {
         LandRegister.abi,
         deployedNetwork && deployedNetwork.address
       );
-  
+      const instance2 = new web3.eth.Contract(
+        TerraToken.abi,
+        deployedNetwork && "0x7df98bbf021b3634fa54bde2ccd5df412a16cdd1"
+      );
+
+      setBalance(instance2)
+      
       setContract(instance);
     } else {
       console.log('No authorized account found');
@@ -75,6 +83,8 @@ const Web3Provider = ({ children }) => {
         checkIfWalletIsConnected,
         account,
         Contract,
+
+        balance
       }}
     >
       {children}

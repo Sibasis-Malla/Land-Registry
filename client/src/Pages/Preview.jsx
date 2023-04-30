@@ -24,7 +24,7 @@ export default function Preview() {
         
     },[Contract])
     const handleSubmit = async(event)=>{
-        request(Contract,land.id,bid,account.currentAccount).then(data=>{
+        request(Contract,account.currentAccount,land.id,bid,account.currentAccount).then(data=>{
             alert("Bid submitted waiting For Approval")
         })
 

@@ -4,13 +4,14 @@ import { getAllLands } from "../contexts/useContract/readContract";
 import Web3Context from "../contexts";
 import { Link } from "react-router-dom";
 
-const DashBoard = () => {
+const MyLands = () => {
   const {Contract,account}=useContext(Web3Context);
   const [data,setData] = useState();
   useEffect(()=>{
-       getAllLands(Contract).then(data=>{
-        console.log(data)
-        setData(data)
+       getAllLands(Contract,account).then(data=>{
+        const temp = data.filter(data.CurrOwner === account.currentAccount)
+        console.log(temp)
+        setData(temp)
        })
       // console.log(res)
   },[Contract])
@@ -49,9 +50,9 @@ const DashBoard = () => {
 
   return (
     <div>
-      <Navbar selected="MarketPlace" />
+      <Navbar selected="MyLands" />
       <div className="mt-6 ml-6">
-        <h1 className=" text-3xl mb-6">Lands For Sale</h1>
+        <h1 className=" text-3xl mb-6">My Lands</h1>
         <ul className="flex justify-start items-center space-x-6">
           {data && data.map((item, index) => {
             return <Card key={index} land={item} />;
@@ -62,4 +63,4 @@ const DashBoard = () => {
   );
 };
 
-export default DashBoard;
+export default MyLands;

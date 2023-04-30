@@ -65,11 +65,12 @@ const Navbar = ({ selected }) => {
             class="h-8 mr-3"
             alt="Flowbite Logo"
           />
-          <span class="self-center text-2xl font-semibold whitespace-nowrap text-black">
-            Terra
-          </span>
+          <Link to="/">
+            <span class="self-center text-2xl font-semibold whitespace-nowrap text-black">
+              Terra
+            </span>
+          </Link>
         </a>
-      
         <div class="flex md:order-2">
           {selected === "Buy and Sell" && (
             <div className="flex flex-row space-x-3">
@@ -120,14 +121,21 @@ const Navbar = ({ selected }) => {
           </ul>
           {/* <button type="button" class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Alternative</button> */}
 
-          {account.currentAccount == null ?(<div  class="mr-24 cursor-pointer text-white bg-black w-52 h-10 text-center rounded-xl pt-2 px-4" onClick={connectWallet} >+ Connect Wallet</div>):(
-          <div className=" flex justify-center items-center mr-24 text-black">
-            Hey,{' '}
-            {`${String(account.currentAccount).slice(0, 9)}...${String(
-              account.currentAccount
-            ).slice(String(account.currentAccount).length - 9)}`}
-          </div>
-        )}
+          {account.currentAccount == null ? (
+            <div
+              class="mr-24 cursor-pointer text-white bg-black w-52 h-10 text-center rounded-xl pt-2 px-4"
+              onClick={connectWallet}
+            >
+              + Connect Wallet
+            </div>
+          ) : (
+            <div className=" flex justify-center items-center mr-24 text-black">
+              Hey,{" "}
+              {`${String(account.currentAccount).slice(0, 9)}...${String(
+                account.currentAccount
+              ).slice(String(account.currentAccount).length - 9)}`}
+            </div>
+          )}
         </div>
         My TerraTokens Balance:{bal}
       </div>

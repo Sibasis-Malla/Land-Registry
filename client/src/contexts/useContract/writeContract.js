@@ -46,17 +46,17 @@ const buy = async(contract,account,price)=>{
     return false;
   }
   const res = await contract.methods
-  .buy(id,receiver)
+  .buy(account,price)
   .send({ from: account });
 return res;
 }
 
-const addLand = async(contract,account,name,currentOwner,currPrice,metaData)=>{
+const addLand = async(contract,account,name,currPrice,metaData,long,lat,image)=>{
   if (!contract) {
     return false;
   }
   const res = await contract.methods
-  .addLand(contract,account,name,currentOwner,currPrice,metaData)
+  .addLand(name,currPrice,image,metaData,long,lat)
   .send({ from: account });
 return res;
 }
@@ -66,7 +66,7 @@ const putOnsale = async(contract,account,id,currPrice)=>{
     return false;
   }
   const res = await contract.methods
-  .putOnsale(contract,account,id,currPrice)
+  .putOnsale(id,currPrice)
   .send({ from: account });
 return res;
 }

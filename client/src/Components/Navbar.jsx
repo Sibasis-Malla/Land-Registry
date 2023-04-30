@@ -1,11 +1,21 @@
-import React,{useContext} from "react";
+import React,{useContext,useEffect, useState} from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Web3Context from '../contexts';
+import { getTbalance } from "../contexts/useContract/readContract";
+
 
 const Navbar = ({ selected }) => {
-  const { connectWallet, account,Contract } = useContext(Web3Context);
+  const { connectWallet, account,Contract,balance } = useContext(Web3Context);
   // console.log(Contract)
+  const[ bal,setBalance] = useState()
+  useEffect(()=>{
+    getTbalance(balance,account.currentAccount).then(data=>{
+      console.log(bal)
+      setBalance(data)
+    })
+  },[balance])
+
 
   const navigate = useNavigate();
   function handleClick(event) {
@@ -102,7 +112,7 @@ const Navbar = ({ selected }) => {
               <LinkComp linkTo="/addLand" text="Add Land Info" />
             </li>
             <li>
-              <LinkComp linkTo="/services" text="Services" />
+              <LinkComp linkTo="/Requests" text="Requests" />
             </li>
             <li>
               <LinkComp linkTo="/dashboard" text="Dashboard" />
@@ -119,13 +129,7 @@ const Navbar = ({ selected }) => {
           </div>
         )}
         </div>
-         {/* <div type="button" class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">+ Connect Wallet</div> */}
-        {/* <div
-            className="mr-24 cursor-pointer text-black bg-secondary-2 w-52 h-10 text-center rounded-xl pt-2 px-4"
-            // onClick={connectWallet}
-          >
-            + Connect Wallet
-          </div> */}
+        My TerraTokens Balance:{bal}
       </div>
     </nav>
   );

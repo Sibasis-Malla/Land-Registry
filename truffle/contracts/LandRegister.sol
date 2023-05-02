@@ -23,8 +23,10 @@ contract LandRegister is ERC721URIStorage {
         string metadata;
     }
     struct requestLands {
-        uint256 LandId;
+        uint256 reqId;
+       uint256 LandId;
         uint256 bid;
+        address wallet;
         bool state;
     }
     enum Status {
@@ -64,6 +66,7 @@ contract LandRegister is ERC721URIStorage {
     }
 
     function request(
+     
         uint256 id,
         uint256 bid,
         address wallet
@@ -74,6 +77,9 @@ contract LandRegister is ERC721URIStorage {
         allrequests[reqCounter].state = true;
         allrequests[reqCounter].bid = bid;
         allrequests[reqCounter].LandId = id;
+         allrequests[reqCounter].reqId = reqCounter;
+         allrequests[reqCounter].wallet = wallet;
+
         reqCounter++;
     }
 

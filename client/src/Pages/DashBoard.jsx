@@ -56,7 +56,7 @@ const DashBoard = () => {
 
   return (
     <div>
-      <Navbar selected="Dashboard" />
+      <Navbar selected="MarketPlace" />
       <div className="mt-6 ml-6">
         <h1 className=" text-3xl mb-6">Lands For Sale</h1>
         <ul className="flex justify-start items-center space-x-6">

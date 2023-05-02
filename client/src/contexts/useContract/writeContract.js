@@ -41,12 +41,12 @@ const transferLand=async(contract,account,id,receiver)=>{
     .send({ from: account });
   return res;
 }
-const buy = async(contract,account,price)=>{
+const buy = async(contract,id,account,price)=>{
   if (!contract) {
     return false;
   }
   const res = await contract.methods
-  .buy(account,price)
+  .buy(id,price)
   .send({ from: account });
 return res;
 }
